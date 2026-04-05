@@ -44,7 +44,7 @@ async function sanityFetch(query) {
 async function sanityFetchFresh(query) {
   const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
   
-  // 🚀 PATH A: Working locally with a Token (for private datasets)
+  // 🚀 PATH A: Working locally with a Token
   if (isLocal && SANITY_CONFIG.token) {
     const url = `https://${SANITY_CONFIG.projectId}.api.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
     const res = await fetch(url, { headers: { "Authorization": `Bearer ${SANITY_CONFIG.token}` } });
@@ -52,14 +52,11 @@ async function sanityFetchFresh(query) {
     return json.result;
   }
 
-  // 🚀 PATH B: CDN Direct (fastest — no proxy hop, globally cached by Sanity)
+  // 🚀 PATH B: Public CDN Direct (fastest — globally cached, no proxy hop)
   const url = `https://${SANITY_CONFIG.projectId}.apicdn.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
   const res = await fetch(url);
   if (!res.ok) {
-     if (res.status === 401 || res.status === 404) {
-        throw new Error(`Sanity Access Denied (Status ${res.status}). Ensure your dataset is "Public" or set window.SANITY_DEV_TOKEN.`);
-     }
-     throw new Error(`Sanity Error: ${res.statusText}`);
+     throw new Error(`Sanity Error: ${res.status} ${res.statusText}`);
   }
   const json = await res.json();
   return json.result;
