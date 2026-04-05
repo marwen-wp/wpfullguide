@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script data-cfasync="false" id="base-router">
+    (function() {
+      var base = document.createElement("base");
+      base.href = window.location.pathname.includes("/frontend/") ? "/frontend/" : "/";
+      document.currentScript.parentNode.insertBefore(base, document.currentScript);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selected Case Studies — wpfullguide Studio</title>

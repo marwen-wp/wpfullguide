@@ -24,15 +24,14 @@ const i18n = {
     return lang;
   },
 
-  // The true directory where the site is installed (e.g. "/frontend" or "")
   get siteBase() {
     const path = window.location.pathname;
-    const parts = path.split('/').filter(Boolean);
-    // Find everything BEFORE any language code or .html filename
-    const idx = parts.findIndex(p => LANGUAGES.includes(p) || p.includes('.html'));
-    const baseParts = idx === -1 ? parts : parts.slice(0, idx);
-    let base = baseParts.length > 0 ? '/' + baseParts.join('/') : '';
-    return base.replace(/\/$/, ''); // No trailing slash
+    const parts = path.split('/');
+    const fIdx = parts.indexOf('frontend');
+    if (fIdx !== -1) {
+      return '/' + parts.slice(1, fIdx + 1).join('/'); // returns e.g. "/frontend"
+    }
+    return ''; // root in production
   },
 
   /**
