@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Discovery Call — wpfullguide Studio</title>
   <script>
-    // Dynamic Base Routing for Professionals
+    // Bulletproof Environment-Aware Routing
     (function() {
       const path = window.location.pathname;
-      const parts = path.split('/').filter(Boolean);
-      const idx = parts.findIndex(p => ['en','fr','ar'].includes(p) || p.includes('.html'));
-      const baseParts = idx === -1 ? parts : parts.slice(0, idx);
-      const base = baseParts.length > 0 ? '/' + baseParts.join('/') + '/' : '/';
+      const parts = path.split('/');
+      const fIdx = parts.indexOf('frontend');
+      const base = fIdx !== -1 ? parts.slice(0, fIdx + 1).join('/') + '/' : '/';
       document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
     })();
   </script>
