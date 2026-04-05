@@ -11,16 +11,7 @@
     })();
   </script>
   <title>wpfullguide — High-End WordPress Development Studio</title>
-  <script>
-    // Bulletproof Environment-Aware Routing
-    (function() {
-      const path = window.location.pathname;
-      const parts = path.split('/');
-      const fIdx = parts.indexOf('frontend');
-      const base = fIdx !== -1 ? parts.slice(0, fIdx + 1).join('/') + '/' : '/';
-      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
-    })();
-  </script>
+  <base href="/">
   <meta name="description" content="Expert WordPress development studio specializing in custom themes, blazing-fast WooCommerce stores, and headless architectures for elite digital brands." />
   <meta name="keywords" content="WordPress studio, custom WordPress themes, WooCommerce experts, Gutenberg development, headless WordPress development, high-end agency" />
   <meta name="robots" content="index, follow" />

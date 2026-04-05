@@ -4,16 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Discovery Call — wpfullguide Studio</title>
-  <script>
-    // Bulletproof Environment-Aware Routing
-    (function() {
-      const path = window.location.pathname;
-      const parts = path.split('/');
-      const fIdx = parts.indexOf('frontend');
-      const base = fIdx !== -1 ? parts.slice(0, fIdx + 1).join('/') + '/' : '/';
-      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
-    })();
-  </script>
+  <base href="/">
   <meta name="description" content="Ready to transform your WordPress project? Book a free 30-minute strategy call with our expert team to discuss your custom development needs." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://wpfullguide.com/booking.html" />

@@ -4,16 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selected Case Studies — wpfullguide Studio</title>
-  <script>
-    // Bulletproof Environment-Aware Routing
-    (function() {
-      const path = window.location.pathname;
-      const parts = path.split('/');
-      const fIdx = parts.indexOf('frontend');
-      const base = fIdx !== -1 ? parts.slice(0, fIdx + 1).join('/') + '/' : '/';
-      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
-    })();
-  </script>
+  <base href="/">
   <meta name="description" content="Discover how we transform brands with WordPress. Explore our portfolio of custom themes, WooCommerce builds, and high-performance technical case studies." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://wpfullguide.com/work.html" />
