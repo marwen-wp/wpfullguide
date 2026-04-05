@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wpfullguide — High-End WordPress Development Studio</title>
+  <meta name="description" content="Expert WordPress development studio specializing in custom themes, blazing-fast WooCommerce stores, and headless architectures for elite digital brands." />
+  <meta name="keywords" content="WordPress studio, custom WordPress themes, WooCommerce experts, Gutenberg development, headless WordPress development, high-end agency" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://wpfullguide.com/" />
+
+  <!-- Social Media — Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wpfullguide.com/" />
+  <meta property="og:title" content="wpfullguide — High-End WordPress Development" />
+  <meta property="og:description" content="Expert WordPress development for high-growth brands. We build bespoke custom themes and WooCommerce experiences with precision." />
+  <meta property="og:image" content="https://wpfullguide.com/assets/og-image.jpg" />
+
+  <!-- Social Media — Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://wpfullguide.com/" />
+  <meta property="twitter:title" content="wpfullguide — High-End WordPress Development" />
+  <meta property="twitter:description" content="Expert WordPress development for high-growth brands. We build bespoke custom themes and WooCommerce experiences with precision." />
+  <meta property="twitter:image" content="https://wpfullguide.com/assets/og-image.jpg" />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+</head>
+<body>
+  <div class="glow-cursor" id="glow-cursor"></div>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav-header" id="nav-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" id="nav-logo" aria-label="wpfullguide home">wpfullguide</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="work.html" class="nav-link">Work</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+      </ul>
+      <a href="booking.html" class="btn btn-primary nav-cta" id="nav-cta">
+        Get Started
+        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="hero" aria-label="Hero section">
+      <!-- Decorative stars -->
+      <span class="hero-star hero-star--1" aria-hidden="true">✦</span>
+      <span class="hero-star hero-star--2" aria-hidden="true">✦</span>
+      <span class="hero-star hero-star--3" aria-hidden="true">+</span>
+      <span class="hero-star hero-star--4" aria-hidden="true">+</span>
+
+      <div class="container hero-container">
+        <h1 class="hero-headline" id="hero-headline"></h1>
+        <p class="hero-sub" id="hero-sub"></p>
+        <div class="hero-actions" id="hero-actions"></div>
+      </div>
+
+      <div class="hero-marquee" id="hero-marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee-track"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section class="projects section" id="projects" aria-label="Projects section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" id="projects-label">Work</div>
+          <h2 class="section-headline" id="projects-headline"></h2>
+        </div>
+        <div class="projects-grid" id="projects-grid" role="list"></div>
+        <div class="projects-footer">
+          <a href="work.html" class="btn btn-outline" id="projects-cta">View All Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="services section" id="services" aria-label="Services section" style="background: var(--color-bg-2);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" id="services-label"></div>
+          <h2 class="section-headline" id="services-headline"></h2>
+        </div>
+        <div class="services-grid" id="services-grid" role="list"></div>
+        <div style="text-align: center; margin-top: var(--space-xl);">
+            <a href="services.html" class="btn btn-ghost">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about section" id="about">
+      <div class="container" style="max-width: 800px; text-align: center;">
+        <div class="section-label" id="about-label"></div>
+        <div class="about-profile">
+          <img src="https://images.unsplash.com/photo-1542596594-649edbc13630?q=80&w=200&auto=format&fit=crop" alt="Profile" />
+        </div>
+        <h2 class="section-headline" id="about-headline" style="margin-bottom: var(--space-md);"></h2>
+        <p class="about-body" id="about-body" style="margin-bottom: var(--space-xl); font-size: 1.15rem;"></p>
+        <div class="about-stats" id="about-stats"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PROCESS ===================== -->
+    <section class="process section" id="process" aria-label="Process section" style="background: var(--color-bg-2);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" id="process-label"></div>
+          <h2 class="section-headline" id="process-headline"></h2>
+        </div>
+        <div class="process-grid" id="process-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="testimonials section" id="testimonials" style="background: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" id="testimonials-label"></div>
+          <h2 class="section-headline" id="testimonials-headline"></h2>
+        </div>
+        <div class="testimonials-overflow">
+          <div class="testimonials-grid" id="testimonials-carousel">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER ===================== -->
+    <section class="cta-banner">
+      <div class="container overflow-hidden">
+        <div class="cta-card">
+          <div class="section-label" id="cta-card-label">Get Started</div>
+          <h2 class="cta-card-headline" id="cta-card-headline">Ready to start your next WordPress project?</h2>
+          <p class="cta-card-sub" id="cta-card-sub">Let's hop on a free 30-minute discovery call — no obligation, just clear guidance.</p>
+          <a href="booking.html" class="btn btn-primary" id="cta-card-btn">
+            <span id="cta-card-btn-label">Book My Free Call</span>
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">wpfullguide</a>
+      <p class="footer-copy" id="footer-copy"></p>
+      <div class="footer-socials" id="footer-socials"></div>
+    </div>
+  </footer>
+
+    <!-- Scripts — Professionals use site-relative paths -->
+  <script src="js/i18n.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

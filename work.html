@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selected Case Studies — wpfullguide Studio</title>
+  <meta name="description" content="Discover how we transform brands with WordPress. Explore our portfolio of custom themes, WooCommerce builds, and high-performance technical case studies." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://wpfullguide.com/work.html" />
+
+  <!-- Social Media — Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wpfullguide.com/work.html" />
+  <meta property="og:title" content="Selected Case Studies — wpfullguide Studio" />
+  <meta property="og:description" content="Discover how we transform brands with high-performance WordPress development and bespoke design." />
+  <meta property="og:image" content="https://wpfullguide.com/assets/og-work.jpg" />
+
+  <!-- Social Media — Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://wpfullguide.com/work.html" />
+  <meta property="twitter:title" content="Selected Case Studies — wpfullguide Studio" />
+  <meta property="twitter:description" content="Discover how we transform brands with high-performance WordPress development and bespoke design." />
+  <meta property="twitter:image" content="https://wpfullguide.com/assets/og-work.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+</head>
+<body>
+  <div class="glow-cursor" id="glow-cursor"></div>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav-header" id="nav-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" id="nav-logo" aria-label="wpfullguide home">wpfullguide</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="work.html" class="nav-link">Work</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+      </ul>
+      <a href="booking.html" class="btn btn-primary nav-cta" id="nav-cta">Get Started</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===================== PAGE HERO ===================== -->
+    <section class="hero page-hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-orb hero-orb--2" style="top: -10%; right: 40%;"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="container hero-container" style="text-align: center;">
+        <div class="section-label" id="projects-label" style="margin-inline: auto;"></div>
+        <h1 class="hero-headline" id="projects-headline" style="font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 0;"></h1>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS GRID ===================== -->
+    <section class="projects section" id="projects" style="padding-top: var(--space-xl);">
+      <div class="container">
+        <div class="projects-grid" id="projects-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER ===================== -->
+    <section class="cta-banner">
+      <div class="container overflow-hidden">
+        <div class="cta-card">
+          <div class="section-label">Get Started</div>
+          <h2 class="cta-card-headline">Ready to take your WordPress site to the next level?</h2>
+          <p class="cta-card-sub">Let's talk! Book a free 30-minute consultation — no obligation, just expert advice.</p>
+          <a href="booking.html" class="btn btn-primary">Book My Free Call</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">wpfullguide</a>
+      <p class="footer-copy" id="footer-copy"></p>
+      <div class="footer-socials" id="footer-socials"></div>
+    </div>
+  </footer>
+
+    <!-- Scripts — Professionals use site-relative paths -->
+  <script src="js/i18n.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

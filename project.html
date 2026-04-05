@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wpfullguide — Project Case Study</title>
+  <script>
+    // Dynamic Base Routing for Professionals
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/').filter(Boolean);
+      const idx = parts.findIndex(p => ['en','fr','ar'].includes(p) || p.includes('.html'));
+      const baseParts = idx === -1 ? parts : parts.slice(0, idx);
+      const base = baseParts.length > 0 ? '/' + baseParts.join('/') + '/' : '/';
+      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
+    })();
+  </script>
+  <meta name="description" content="Explore our detailed WordPress project case study." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+</head>
+<body>
+  <div class="glow-cursor" id="glow-cursor"></div>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav-header" id="nav-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" id="nav-logo" aria-label="wpfullguide home">wpfullguide</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="work.html" class="nav-link">Work</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+      </ul>
+      <a href="booking.html" class="btn btn-primary nav-cta" id="nav-cta">
+        Get Started
+        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===================== CASE STUDY HERO ===================== -->
+    <section class="hero page-hero" id="hero">
+      <div class="hero-bg" id="project-bg" aria-hidden="true" style="opacity: 0.4;">
+        <!-- Dynamic color injected here -->
+        <div class="hero-orb" id="project-orb" style="width: 60vw; height: 60vw; top: -10%; left: -5%; filter: blur(120px);"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="container hero-container" style="text-align: center;">
+        <div class="section-label" id="project-category">Case Study</div>
+        <h1 class="hero-headline" id="project-title" style="font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -0.05em; margin-bottom: 1rem;">Loading...</h1>
+        <div id="project-subtitle" style="font-family: var(--font-sans); color: var(--color-text-3); font-size: 0.9rem; letter-spacing: 0.2rem; text-transform: uppercase;"></div>
+      </div>
+    </section>
+
+    <!-- ===================== CASE STUDY CONTENT ===================== -->
+    <section class="project-details section">
+      <div class="container">
+        <div class="about-layout">
+          <div class="about-content-column">
+            <div class="section-label">Challenge</div>
+            <h2 class="section-headline" id="project-challenge-headline" style="margin-bottom: 2rem;">The Goal.</h2>
+            <div id="project-body" class="about-body-container">
+               <!-- Dynamic body text -->
+            </div>
+          </div>
+          <div class="about-image-column">
+             <div id="project-main-image-container" style="width: 100%; aspect-ratio: 16/9; background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                 <!-- Dynamic image -->
+                 <span style="font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 2px;">PREVIEW</span>
+             </div>
+             <div style="margin-top: 1.5rem;" id="project-external-link">
+                 <!-- Dynamic link -->
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECT GALLERY ===================== -->
+    <section class="project-gallery section" id="gallery-section" style="background: var(--color-bg-2); display: none;">
+      <div class="container">
+         <div class="section-header">
+           <div class="section-label">Interface</div>
+           <h2 class="section-headline">Visual Showcase.</h2>
+         </div>
+         
+         <div class="project-gallery-grid" id="project-gallery-grid">
+             <!-- Dynamic images -->
+         </div>
+      </div>
+    </section>
+
+    <!-- ===================== BACK TO WORK CTA ===================== -->
+    <section class="cta-banner" style="text-align: center; border-top: 1px solid var(--color-border);">
+      <div class="container">
+          <a href="work.html" class="btn btn-ghost" style="margin-bottom: var(--space-xl);">← Back to all work</a>
+          
+          <div class="cta-card">
+              <div class="section-label">Get Started</div>
+              <h2 class="cta-card-headline">Ready for a similar transformation?</h2>
+              <p class="cta-card-sub">Book your free 30-minute discovery call — let's build something exceptional together.</p>
+              <a href="booking.html" class="btn btn-primary" id="final-cta-btn">
+                Book My Free Call
+                <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+          </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">wpfullguide</a>
+      <p class="footer-copy" id="footer-copy"></p>
+      <div class="footer-socials" id="footer-socials"></div>
+    </div>
+  </footer>
+
+    <!-- Scripts — Professionals use site-relative paths -->
+  <script src="js/i18n.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

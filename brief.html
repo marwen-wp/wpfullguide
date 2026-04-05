@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Project Brief — wpfullguide Studio</title>
+  <script>
+    // Dynamic Base Routing for Professionals
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/').filter(Boolean);
+      const idx = parts.findIndex(p => ['en','fr','ar'].includes(p) || p.includes('.html'));
+      const baseParts = idx === -1 ? parts : parts.slice(0, idx);
+      const base = baseParts.length > 0 ? '/' + baseParts.join('/') + '/' : '/';
+      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
+    })();
+  </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <style type="text/css">
+      :root {
+        --color-bg: #09090a;
+        --color-accent: #a8e86e;
+        --radius-full: 100px;
+        --t-base: 0.4s;
+        --ease-out: cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #f7f7f9;
+        font-family: 'DM Sans', sans-serif;
+      }
+      
+      iframe {
+        position: absolute;
+        inset: 0;
+        border: 0;
+        z-index: 2;
+      }
+      
+      .back-btn {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.7rem 1.6rem;
+        background: var(--color-bg);
+        border-radius: var(--radius-full);
+        color: #f4f4f7;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all var(--t-base) var(--ease-out);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+      
+      .back-btn:hover {
+        background: #141417;
+        color: var(--color-accent);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+        border-color: rgba(168, 232, 110, 0.3);
+      }
+
+      @media (max-width: 600px) {
+        .back-btn {
+          top: 1rem;
+          left: 1rem;
+          padding: 0.5rem 1rem;
+          font-size: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back-btn">← Back to Site</a>
+    
+    <iframe data-tally-src="https://tally.so/r/obGp8M?transparentBackground=1" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="Brief"></iframe>
+  </body>
+</html>

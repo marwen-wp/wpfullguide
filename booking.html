@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Discovery Call — wpfullguide Studio</title>
+  <script>
+    // Dynamic Base Routing for Professionals
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/').filter(Boolean);
+      const idx = parts.findIndex(p => ['en','fr','ar'].includes(p) || p.includes('.html'));
+      const baseParts = idx === -1 ? parts : parts.slice(0, idx);
+      const base = baseParts.length > 0 ? '/' + baseParts.join('/') + '/' : '/';
+      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
+    })();
+  </script>
+  <meta name="description" content="Ready to transform your WordPress project? Book a free 30-minute strategy call with our expert team to discuss your custom development needs." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://wpfullguide.com/booking.html" />
+
+  <!-- Social Media — Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wpfullguide.com/booking.html" />
+  <meta property="og:title" content="Book a Discovery Call — wpfullguide Studio" />
+  <meta property="og:description" content="Ready to transform your WordPress project? Book a free 30-minute strategy call with our expert team." />
+  <meta property="og:image" content="https://wpfullguide.com/assets/og-booking.jpg" />
+
+  <!-- Social Media — Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://wpfullguide.com/booking.html" />
+  <meta property="twitter:title" content="Book a Discovery Call — wpfullguide Studio" />
+  <meta property="twitter:description" content="Ready to transform your WordPress project? Book a free 30-minute strategy call with our expert team." />
+  <meta property="twitter:image" content="https://wpfullguide.com/assets/og-booking.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+</head>
+<body>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav-header" id="nav-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" id="nav-logo" aria-label="wpfullguide home">wpfullguide</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="work.html" class="nav-link">Work</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+      </ul>
+      <a href="booking.html" class="btn btn-primary nav-cta" id="nav-cta">Get Started</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===================== PAGE HERO ===================== -->
+    <section class="hero page-hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="container hero-container" style="text-align: center;">
+        <div class="section-label" style="margin: 0 auto 1.5rem auto; display: flex; gap: 0.5rem; align-items: center; justify-content: center;" id="booking-status">
+          <span style="width: 8px; height: 8px; background: #a8e86e; border-radius: 50%; display: inline-block;"></span>
+          Available for new projects
+        </div>
+        <h1 class="hero-headline" style="font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -0.04em; margin-bottom: 0;" id="booking-headline">Let's build something<br/>exceptional together.</h1>
+      </div>
+    </section>
+
+    <!-- ===================== BOOKING CONTENT ===================== -->
+    <section class="booking section" id="booking" style="padding-top: var(--space-xl); padding-bottom: 0;">
+      <div class="cal-embed-container">
+        <!-- Cal inline embed code begins -->
+        <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-30-min-meeting"></div>
+        <script type="text/javascript">
+            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+            Cal("init", "30-min-meeting", {origin:"https://app.cal.com"});
+
+            Cal.ns["30-min-meeting"]("inline", {
+              elementOrSelector:"#my-cal-inline-30-min-meeting",
+              config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+              calLink: "marwen-am/30-min-meeting",
+            });
+        </script>
+        <!-- Cal inline embed code ends -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">wpfullguide</a>
+      <p class="footer-copy" id="footer-copy"></p>
+      <div class="footer-socials" id="footer-socials"></div>
+    </div>
+  </footer>
+
+    <!-- Scripts — Professionals use site-relative paths -->
+  <script src="js/i18n.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
