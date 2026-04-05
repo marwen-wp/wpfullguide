@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>wpfullguide — High-End WordPress Development Studio</title>
+  <script>
+    // Bulletproof Environment-Aware Routing
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/');
+      const fIdx = parts.indexOf('frontend');
+      const base = fIdx !== -1 ? parts.slice(0, fIdx + 1).join('/') + '/' : '/';
+      document.write('<base href="' + base.replace(/\/+/g, '/') + '">');
+    })();
+  </script>
   <meta name="description" content="Expert WordPress development studio specializing in custom themes, blazing-fast WooCommerce stores, and headless architectures for elite digital brands." />
   <meta name="keywords" content="WordPress studio, custom WordPress themes, WooCommerce experts, Gutenberg development, headless WordPress development, high-end agency" />
   <meta name="robots" content="index, follow" />
@@ -32,8 +42,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
 </head>
 <body>
   <div class="glow-cursor" id="glow-cursor"></div>
