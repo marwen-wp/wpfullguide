@@ -136,8 +136,13 @@ const i18n = {
       if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http') && !href.startsWith(window.location.origin)) return;
       if (a.classList.contains('lang-btn') || a.getAttribute('onclick')) return;
 
-      // Extract only the filename (e.g. "work.html" from any path)
-      const parts = href.split('/').filter(p => p && !LANGUAGES.includes(p) && p !== 'index.html');
+      // Strip current base and languages for clean filename extraction
+      let cleanHref = href;
+      if (base && cleanHref.startsWith(base)) {
+        cleanHref = cleanHref.slice(base.length);
+      }
+      
+      const parts = cleanHref.split('/').filter(p => p && !LANGUAGES.includes(p) && p !== 'index.html');
       const filename = parts.pop() || ''; // Get the last part (file.html)
 
       // Rebuild the path from the ROOT using our detected base

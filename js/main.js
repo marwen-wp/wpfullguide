@@ -332,7 +332,13 @@ function renderServices(services) {
 function renderProjects(projects) {
   setText("projects-label", i18n.t(projects.label) || "");
   if (projects.headline) setHtml("projects-headline", i18n.t(projects.headline).replace(/\n/g, "<br>"));
-  setText("projects-cta", i18n.t(projects.cta) || "");
+  
+  const ctaBtn = document.getElementById("projects-cta");
+  if (ctaBtn) {
+    ctaBtn.textContent = i18n.t(projects.cta) || "";
+    // Always use the dynamic/localized work.html path for consistency
+    ctaBtn.href = i18n.url("work.html");
+  }
 
   const grid = document.getElementById("projects-grid");
   if (grid && projects.items) {
@@ -361,12 +367,14 @@ function renderProjects(projects) {
           </div>
           <div class="project-info">
             <div class="project-meta">
-              <span class="project-category">${i18n.t(proj.category)}</span>
+              <div class="categories-wrap" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                ${(i18n.t(proj.category) || '').split(',').map(cat => `<span class="project-category tag">${cat.trim()}</span>`).join('')}
+              </div>
               <span class="project-year">${proj.year}</span>
             </div>
             <h3 class="project-title">${i18n.t(proj.title)}</h3>
             <p class="project-desc">${i18n.t(proj.description)}</p>
-            <span class="project-link" aria-hidden="true">
+            <span class="project-link" aria-hidden="true" style="display: inline-flex; align-items: center; gap: 0.35rem;">
               View project
               <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -615,7 +623,8 @@ function renderProjectDetail(projects, id) {
   
   // Update Hero
   setText("project-title", i18n.t(proj.title));
-  setText("project-category", i18n.t(proj.category));
+  const cats = (i18n.t(proj.category) || '').split(',').map(c => c.trim()).join(' • ');
+  setText("project-category", cats);
   setText("project-subtitle", `${proj.year} Case Study`);
   
   // Update Background & Orb

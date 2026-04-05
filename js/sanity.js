@@ -77,20 +77,25 @@ async function fetchAllData() {
   // 🚀 SINGLE-QUERY HEARTBEAT: Fetch all 11 sections in ONE round-trip.
   const query = `{
     "siteConfig": *[_type == "siteConfig" && _id == "siteConfig-${lang}"][0]{
-      siteName, tagline,
-      mainMenu[]{title, href}, navCta{label, href}, socials[]{label, href, icon}, footerCopy
+      siteName, tagline, navCta{label, href}, footerCopy
     },
-    "brand": *[_type == "brand"][0]{
+    "socials": *[_type == "socials" && _id == "socials-global"][0]{
+      linkedin, github
+    },
+    "brand": *[_type == "brand" && _id == "brand-global"][0]{
       "siteLogoUrl": siteLogo.asset->url, "siteFaviconUrl": siteFavicon.asset->url, primaryColor, accentColor
     },
     "hero": *[_type == "hero" && _id == "hero-${lang}"][0]{
       eyebrow, headline, sub, cta, ctaSecondary, marqueeItems
     },
     "about": *[_type == "about" && _id == "about-${lang}"][0]{
-      label, headline, body, stats[]{value, label}, "imageUrl": image.asset->url
+      label, headline, body, stats[]{value, label}, imageUrl
     },
     "services": *[_type == "services" && _id == "services-${lang}"][0]{
       label, headline, "items": items[]{ id, icon, title, description, tags }
+    },
+    "selectedWork": *[_type == "selectedWork" && _id == "selectedWork-${lang}"][0]{
+      label, headline, cta
     },
     "projects": {
       "config": *[_type == "projects" && _id == "projects-${lang}"][0]{ label, headline, cta },
@@ -111,16 +116,48 @@ async function fetchAllData() {
     "ctaBanner": *[_type == "ctaBanner" && _id == "ctaBanner-${lang}"][0]{
       label, headline, subtext, button
     },
-    "booking": *[_type == "bookingPage" && language == "${lang}"][0]{ statusLabel, headline }
+    "booking": *[_type == "bookingPage" && _id == "bookingPage-${lang}"][0]{ statusLabel, headline }
   }`;
 
   try {
     const raw = await sanityFetch(query);
     if (!raw) throw new Error("No data returned from Sanity.");
 
+    // Hardcoded Main Menu items for clean, static navigation
+    const menuTranslations = {
+      en: [
+        { title: "Work", href: "work.html" },
+        { title: "Services", href: "services.html" }
+      ],
+      fr: [
+        { title: "Réalisations", href: "work.html" },
+        { title: "Services", href: "services.html" }
+      ],
+      ar: [
+        { title: "أعمالنا", href: "work.html" },
+        { title: "خدماتنا", href: "services.html" }
+      ]
+    };
+
+    // Construct social items array from global fields
+    const socials = [];
+    if (raw.socials?.linkedin) socials.push({ label: 'LinkedIn', href: raw.socials.linkedin, icon: 'linkedin' });
+    if (raw.socials?.github) socials.push({ label: 'GitHub', href: raw.socials.github, icon: 'github' });
+
     // Clean up and merge objects for the frontend
-    const config = { ...raw.siteConfig, ...raw.brand };
-    const projects = { ...raw.projects?.config, items: raw.projects?.items || [] };
+    const config = { 
+      ...raw.siteConfig, 
+      ...raw.brand, 
+      mainMenu: menuTranslations[lang] || menuTranslations.en,
+      socials
+    };
+
+    // Determine which project config to use (Homepage "Selected Work" vs Work Page "Header")
+    const path = window.location.pathname;
+    const isHomePage = path.endsWith('index.html') || path === '/' || path.endsWith('/portfolio/') || (!path.includes('.html') && !path.includes('work') && !path.includes('booking') && !path.includes('service'));
+    
+    const projectsConfig = (isHomePage && raw.selectedWork) ? raw.selectedWork : (raw.projects?.config || {});
+    const projects = { ...projectsConfig, items: raw.projects?.items || [] };
 
     return { 
       config, 
