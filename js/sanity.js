@@ -20,6 +20,28 @@ const SANITY_CONFIG = {
 
 /* ── 2. FETCH HELPER ─────────────────────────────────────────────────────── */
 async function sanityFetch(query) {
+  // Check sessionStorage cache first (instant on repeat visits / page navigations)
+  const cacheKey = 'sanity_' + btoa(query).slice(0, 40);
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      // Use cache immediately, but revalidate in background (stale-while-revalidate)
+      sanityFetchFresh(query).then(fresh => {
+        if (fresh) sessionStorage.setItem(cacheKey, JSON.stringify(fresh));
+      }).catch(() => {});
+      return parsed;
+    } catch(e) { /* cache corrupted, fetch fresh */ }
+  }
+
+  const result = await sanityFetchFresh(query);
+  if (result) {
+    try { sessionStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+  }
+  return result;
+}
+
+async function sanityFetchFresh(query) {
   const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
   
   // 🚀 PATH A: Working locally with a Token (for private datasets)
@@ -30,22 +52,7 @@ async function sanityFetch(query) {
     return json.result;
   }
 
-  // 🚀 PATH B: Production (using Cloudflare Proxy)
-  if (!isLocal) {
-    try {
-      const res = await fetch("/api/query", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query })
-      });
-      const json = await res.json();
-      return json.result;
-    } catch (err) {
-      console.warn("Proxy failed, trying CDN fallback...");
-    }
-  }
-
-  // 🚀 PATH C: Public CDN (No token - requires the dataset to be "Public" in Sanity settings)
+  // 🚀 PATH B: CDN Direct (fastest — no proxy hop, globally cached by Sanity)
   const url = `https://${SANITY_CONFIG.projectId}.apicdn.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
   const res = await fetch(url);
   if (!res.ok) {
