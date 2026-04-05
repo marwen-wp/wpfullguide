@@ -126,48 +126,31 @@ const i18n = {
    */
   handleLinks() {
     const lang = this.currentLang;
-    const base = this.siteBase;
+    const base = this.siteBase; // e.g. "/frontend" or ""
 
     document.querySelectorAll('a').forEach(a => {
-      const href = a.getAttribute('href');
+      let href = a.getAttribute('href');
       if (!href) return;
       
-      // Internal links only
+      // Ignore non-internal links
       if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http') && !href.startsWith(window.location.origin)) return;
       if (a.classList.contains('lang-btn') || a.getAttribute('onclick')) return;
 
-      // 1. Get absolute path of target
+      // Extract only the filename (e.g. "work.html" from any path)
+      const parts = href.split('/').filter(p => p && !LANGUAGES.includes(p) && p !== 'index.html');
+      const filename = parts.pop() || ''; // Get the last part (file.html)
+
+      // Rebuild the path from the ROOT using our detected base
       let targetPath = '';
-      if (href.startsWith('http')) {
-        targetPath = new URL(href).pathname;
-      } else if (href.startsWith('/')) {
-        targetPath = href;
+      if (filename === '') {
+        targetPath = (lang === DEFAULT_LANG) ? `${base}/` : `${base}/${lang}/`;
       } else {
-        const currentDir = window.location.pathname.replace(/\/[^\/]*$/, '');
-        targetPath = currentDir + '/' + href;
+        targetPath = (lang === DEFAULT_LANG) ? `${base}/${filename}` : `${base}/${lang}/${filename}`;
       }
 
-      // 2. Extract clean filename relative to siteBase
-      const relativeTarget = targetPath.startsWith(base) ? targetPath.slice(base.length) : targetPath;
-      const cleanParts = relativeTarget.split('/').filter(p => p && !LANGUAGES.includes(p) && p !== 'index.html');
-      const filename = cleanParts.join('/') || '';
-      
-      // 3. Rebuild according to current lang
-      let target = '';
-      if (filename === '') {
-         target = lang === DEFAULT_LANG ? `${base}/` : `${base}/${lang}/`;
-      } else {
-         target = lang === DEFAULT_LANG ? `${base}/${filename}` : `${base}/${lang}/${filename}`;
-      }
-      
-      const final = target.replace(/\/+/g, '/');
-      const search = href.includes('?') ? '?' + href.split('?')[1].split('#')[0] : '';
-      const hash = href.includes('#') ? '#' + href.split('#')[1] : '';
-      
-      const fullFinal = final + search + hash;
-      
-      if (a.getAttribute('href') !== fullFinal) {
-        a.setAttribute('href', fullFinal);
+      const finalPath = targetPath.replace(/\/+/g, '/');
+      if (a.getAttribute('href') !== finalPath) {
+        a.setAttribute('href', finalPath);
       }
     });
   },
