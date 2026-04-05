@@ -9,13 +9,31 @@
 // Resolve current page path once — used by renderConfig & renderProjects
 const currentPath = window.location.pathname.split('/').pop() || 'index';
 
+/* ── Loading Screen ─────────────────────────────────────────────────────── */
+(function injectLoader() {
+  const loader = document.createElement('div');
+  loader.className = 'site-loader';
+  loader.id = 'site-loader';
+  loader.innerHTML = '<span class="loader-logo">wpfullguide</span><div class="loader-bar"></div>';
+  document.body.prepend(loader);
+})();
+
+function dismissLoader() {
+  const loader = document.getElementById('site-loader');
+  if (loader) {
+    loader.classList.add('fade-out');
+    setTimeout(() => loader.remove(), 600);
+  }
+}
+
 /* ── Bootstrap ──────────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const data = await loadData();
-    if (!data) return;
+    if (!data) { dismissLoader(); return; }
     
     renderAll(data);
+    dismissLoader();
     
     // Instant initialization for Bolt-Fast performance
     initAnimations();
@@ -23,6 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     initLightbox();
   } catch (err) {
     console.error("Failed to load site data:", err);
+    dismissLoader();
   }
 });
 
