@@ -96,6 +96,15 @@ function initNav() {
         document.body.classList.remove("menu-open");
       });
     });
+
+    // Handle the new bottom close button (X)
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("#nav-close-mobile")) {
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      }
+    });
   }
 }
 

@@ -9,31 +9,13 @@
 // Resolve current page path once — used by renderConfig & renderProjects
 const currentPath = window.location.pathname.split('/').pop() || 'index';
 
-/* ── Loading Screen ─────────────────────────────────────────────────────── */
-(function injectLoader() {
-  const loader = document.createElement('div');
-  loader.className = 'site-loader';
-  loader.id = 'site-loader';
-  loader.innerHTML = '<span class="loader-logo">wpfullguide</span><div class="loader-bar"></div>';
-  document.body.prepend(loader);
-})();
-
-function dismissLoader() {
-  const loader = document.getElementById('site-loader');
-  if (loader) {
-    loader.classList.add('fade-out');
-    setTimeout(() => loader.remove(), 600);
-  }
-}
-
 /* ── Bootstrap ──────────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const data = await loadData();
-    if (!data) { dismissLoader(); return; }
+    if (!data) return;
     
     renderAll(data);
-    dismissLoader();
     
     // Instant initialization for Bolt-Fast performance
     initAnimations();
@@ -41,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     initLightbox();
   } catch (err) {
     console.error("Failed to load site data:", err);
-    dismissLoader();
   }
 });
 
@@ -146,6 +127,31 @@ function renderConfig(config) {
       const isActive = itemPath === cleanPath ? 'active' : '';
       return `<li><a href="${item.href}" class="nav-link ${isActive}">${item.title}</a></li>`;
     }).join('');
+
+    // Inject Mobile-Only CTA
+    if (config.navCta) {
+      navMenu.innerHTML += `
+        <li class="nav-menu-cta">
+          <a href="${config.navCta.href}" class="btn btn-primary">
+            ${config.navCta.label}
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </li>
+      `;
+    }
+
+    // Add Mobile Close Button at the bottom
+    navMenu.innerHTML += `
+      <li class="mobile-only-close">
+        <button class="nav-close-btn" id="nav-close-mobile" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </li>
+    `;
   }
 
   // Update Nav CTA

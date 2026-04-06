@@ -114,65 +114,6 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   LOADING SCREEN
-══════════════════════════════════════════════════════════════ */
-.site-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.5rem;
-  transition: opacity 0.5s var(--ease-out), visibility 0.5s var(--ease-out);
-}
-
-.site-loader .loader-logo {
-  font-family: var(--font-sans);
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--color-text);
-  animation: loaderPulse 1.5s ease-in-out infinite;
-}
-
-.site-loader .loader-bar {
-  width: 48px;
-  height: 3px;
-  border-radius: 3px;
-  background: var(--color-border-2);
-  overflow: hidden;
-  position: relative;
-}
-
-.site-loader .loader-bar::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  width: 40%;
-  border-radius: 3px;
-  background: var(--color-accent);
-  animation: loaderSlide 1s ease-in-out infinite;
-}
-
-.site-loader.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
-
-@keyframes loaderPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@keyframes loaderSlide {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(220%); }
-}
-
 img,
 video {
   max-width: 100%;
@@ -474,6 +415,14 @@ h6 {
 
 .nav-cta {
   flex-shrink: 0;
+}
+
+.nav-menu-cta {
+  display: none;
+}
+
+.mobile-only-close {
+  display: none;
 }
 
 .nav-toggle {
@@ -1893,10 +1842,11 @@ img[loading="lazy"].loaded {
     -webkit-backdrop-filter: blur(28px);
     flex-direction: column;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 2.2rem;
     transform: translateX(100%);
     transition: transform var(--t-slow) var(--ease-out);
     z-index: 999;
+    padding-block: 4rem; /* Padding for the close button at bottom */
   }
 
   .nav-menu.open {
@@ -1904,8 +1854,50 @@ img[loading="lazy"].loaded {
   }
 
   .nav-menu .nav-link {
-    font-size: 2.2rem;
+    font-size: 2rem; /* Slighly smaller to fit the button better */
     font-weight: 600;
+  }
+
+  .mobile-only-close {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .nav-close-btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease-out);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .nav-close-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.1) rotate(90deg);
+    border-color: var(--color-accent);
+  }
+
+  .nav-menu-cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    padding-inline: 1.5rem;
+  }
+
+  .nav-menu-cta .btn {
+    width: 100%;
+    max-width: 320px;
+    font-size: 1.1rem;
+    padding: 1.2rem;
   }
 
   .nav {
@@ -1915,6 +1907,10 @@ img[loading="lazy"].loaded {
   .nav-toggle {
     display: flex;
     z-index: 1001;
+  }
+
+  body.menu-open .nav-toggle {
+    display: none;
   }
 
   .nav-cta {
@@ -2001,6 +1997,17 @@ img[loading="lazy"].loaded {
   .hero-star--1,
   .hero-star--2 {
     display: none;
+  }
+
+  /* Ensure hero content doesn't collide with the absolute-positioned marquee */
+  .hero {
+    padding-bottom: 5rem;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .hero-container {
+    padding-block: 4rem;
   }
 
   .projects-grid {

@@ -20,31 +20,9 @@ const SANITY_CONFIG = {
 
 /* ── 2. FETCH HELPER ─────────────────────────────────────────────────────── */
 async function sanityFetch(query) {
-  // Check sessionStorage cache first (instant on repeat visits / page navigations)
-  const cacheKey = 'sanity_' + btoa(query).slice(0, 40);
-  const cached = sessionStorage.getItem(cacheKey);
-  if (cached) {
-    try {
-      const parsed = JSON.parse(cached);
-      // Use cache immediately, but revalidate in background (stale-while-revalidate)
-      sanityFetchFresh(query).then(fresh => {
-        if (fresh) sessionStorage.setItem(cacheKey, JSON.stringify(fresh));
-      }).catch(() => {});
-      return parsed;
-    } catch(e) { /* cache corrupted, fetch fresh */ }
-  }
-
-  const result = await sanityFetchFresh(query);
-  if (result) {
-    try { sessionStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-  }
-  return result;
-}
-
-async function sanityFetchFresh(query) {
   const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
   
-  // 🚀 PATH A: Working locally with a Token
+  // 🚀 PATH A: Working locally with a Token (for private datasets)
   if (isLocal && SANITY_CONFIG.token) {
     const url = `https://${SANITY_CONFIG.projectId}.api.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
     const res = await fetch(url, { headers: { "Authorization": `Bearer ${SANITY_CONFIG.token}` } });
@@ -52,11 +30,29 @@ async function sanityFetchFresh(query) {
     return json.result;
   }
 
-  // 🚀 PATH B: Public CDN Direct (fastest — globally cached, no proxy hop)
+  // 🚀 PATH B: Production (using Cloudflare Proxy)
+  if (!isLocal) {
+    try {
+      const res = await fetch("/api/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query })
+      });
+      const json = await res.json();
+      return json.result;
+    } catch (err) {
+      console.warn("Proxy failed, trying CDN fallback...");
+    }
+  }
+
+  // 🚀 PATH C: Public CDN (No token - requires the dataset to be "Public" in Sanity settings)
   const url = `https://${SANITY_CONFIG.projectId}.apicdn.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
   const res = await fetch(url);
   if (!res.ok) {
-     throw new Error(`Sanity Error: ${res.status} ${res.statusText}`);
+     if (res.status === 401 || res.status === 404) {
+        throw new Error(`Sanity Access Denied (Status ${res.status}). Ensure your dataset is "Public" or set window.SANITY_DEV_TOKEN.`);
+     }
+     throw new Error(`Sanity Error: ${res.statusText}`);
   }
   const json = await res.json();
   return json.result;
