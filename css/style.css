@@ -1625,7 +1625,7 @@ img[loading="lazy"].loaded {
    14.5 CTA BANNER
 ══════════════════════════════════════════════════════════════ */
 .cta-banner {
-  padding-block: var(--space-xl) var(--space-3xl);
+  padding-block: var(--space-xl);
   position: relative;
 }
 
