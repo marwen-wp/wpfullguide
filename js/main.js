@@ -295,9 +295,10 @@ function renderProcess(process) {
   if (!grid || !process.steps) return;
 
   grid.innerHTML = process.steps.map((step) => {
-    const ctaHtml = step.ctas && step.ctas.length
-      ? `<div class="process-ctas">${step.ctas.map(c =>
-          `<a href="${c.href}" class="btn ${c.primary ? 'btn-primary' : 'btn-ghost process-btn-ghost'}">
+    const ctas = step.ctas || [];
+    const ctaHtml = ctas.length
+      ? `<div class="process-ctas">${ctas.map((c, idx) =>
+          `<a href="${c.href}" class="btn ${c.primary ? 'btn-primary' : 'btn-ghost process-btn-ghost'} btn-step-${idx + 1}">
             ${i18n.t(c.label)}
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
