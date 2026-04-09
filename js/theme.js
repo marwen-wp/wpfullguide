@@ -49,27 +49,59 @@ const ThemeManager = {
   },
 
   injectToggle() {
-    // Polling until nav-actions is ready (injected by i18n.js or static)
+    this.injectHeaderToggle();
+    this.injectMenuToggle();
+  },
+
+  injectHeaderToggle() {
     const interval = setInterval(() => {
       const actionsWrap = document.querySelector('.nav-actions');
       if (actionsWrap) {
         clearInterval(interval);
-        if (document.getElementById('theme-toggle')) return;
+        if (document.getElementById('theme-toggle-header')) return;
 
         const btn = document.createElement('button');
-        btn.id = 'theme-toggle';
-        btn.className = 'theme-toggle';
+        btn.id = 'theme-toggle-header';
+        btn.className = 'theme-toggle theme-toggle-header';
         btn.setAttribute('aria-label', 'Toggle theme');
         btn.innerHTML = this.getIcon();
         btn.onclick = () => this.toggle();
 
-        // Placement: side of language switcher
         const switcher = actionsWrap.querySelector('.lang-dropdown');
         if (switcher) {
           actionsWrap.insertBefore(btn, switcher);
         } else {
           actionsWrap.appendChild(btn);
         }
+      }
+    }, 100);
+  },
+
+  injectMenuToggle() {
+    const interval = setInterval(() => {
+      const menu = document.getElementById('nav-menu');
+      const cta = menu ? menu.querySelector('.nav-menu-cta') : null;
+      if (menu && cta) {
+        clearInterval(interval);
+        if (document.getElementById('nav-menu-theme-wrapper')) return;
+
+        const li = document.createElement('li');
+        li.id = 'nav-menu-theme-wrapper';
+        li.className = 'nav-menu-theme';
+        li.innerHTML = `
+          <div class="theme-switch-container">
+            <span class="theme-label">Theme</span>
+            <button id="theme-toggle-switch" class="theme-switch" aria-label="Toggle theme">
+              <span class="theme-switch-slider"></span>
+            </button>
+          </div>
+        `;
+        
+        // Insert after CTA
+        cta.parentNode.insertBefore(li, cta.nextSibling);
+        
+        const btn = li.querySelector('button');
+        btn.onclick = () => this.toggle();
       }
     }, 100);
   },
@@ -85,8 +117,11 @@ const ThemeManager = {
   },
 
   updateToggleIcon() {
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.innerHTML = this.getIcon();
+    const headerBtn = document.getElementById('theme-toggle-header');
+    if (headerBtn) headerBtn.innerHTML = this.getIcon();
+    
+    // Switch state is handled via CSS [data-theme] on the container, 
+    // but we can add an active class if needed.
   },
 
   listenSystemChange() {
