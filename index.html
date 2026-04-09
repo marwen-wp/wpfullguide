@@ -15,6 +15,10 @@
       window.SITE_ROOT = window.location.pathname.includes('/frontend/') 
         ? window.location.origin + '/frontend/' 
         : window.location.origin + '/';
+      
+      // Theme Loader — Apply dark mode immediately if preferred to prevent flash
+      const theme = localStorage.getItem('site_theme') || 'dark';
+      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
   <title>wpfullguide — High-End WordPress Development Studio</title>
@@ -195,6 +199,7 @@
 
     <!-- Scripts — Professionals use site-relative paths -->
   <script src="js/i18n.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/sanity.js"></script>
   <script src="js/animations.js" defer></script>
   <script src="js/main.js" defer></script>

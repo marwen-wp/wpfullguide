@@ -425,9 +425,9 @@ function initCardHovers() {
     card.addEventListener("mouseenter", () => {
       gsap.to(card, {
         y: -10,
-        backgroundColor: "rgba(30, 30, 34, 0.6)",
-        borderColor: "rgba(168, 232, 110, 0.2)",
-        boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+        backgroundColor: "var(--color-surface-2)",
+        borderColor: "rgba(var(--color-accent-rgb), 0.2)",
+        boxShadow: "var(--shadow-card)",
         duration: 0.4,
         ease: "power2.out"
       });
@@ -455,9 +455,9 @@ function initCardHovers() {
         y: 0,
         rotationY: 0,
         rotationX: 0,
-        backgroundColor: "rgba(22, 22, 25, 0.4)",
-        borderColor: "rgba(255, 255, 255, 0.05)",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2)",
+        backgroundColor: "var(--color-surface)",
+        borderColor: "var(--color-border)",
+        boxShadow: "var(--shadow-card)",
         duration: 0.6,
         ease: "power2.out"
       });
