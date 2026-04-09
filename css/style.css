@@ -2000,6 +2000,12 @@ img[loading="lazy"].loaded {
     display: none;
   }
 
+  .nav-actions {
+    flex: none;
+    margin-right: 1.2rem;
+    gap: var(--space-sm);
+  }
+
   .about-layout {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
