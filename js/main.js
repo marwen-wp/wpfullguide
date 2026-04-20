@@ -671,13 +671,21 @@ function renderProjectDetail(projects, id) {
   // Update Hero
   setText("project-title", i18n.t(proj.title));
   
-  // Handle Category Array or String
-  const rawCats = proj.category || '';
-  const catsJoined = Array.isArray(rawCats) 
-    ? rawCats.map(c => i18n.t(c)).join(' • ') 
-    : (i18n.t(rawCats) || '').split(',').map(c => c.trim()).join(' • ');
+  // Handle Category Array or String as separate tags
+  const categoriesContainer = document.getElementById("project-categories");
+  if (categoriesContainer) {
+    const rawCats = proj.category || '';
+    const catsArray = Array.isArray(rawCats) ? rawCats : rawCats.split(',').map(c => c.trim()).filter(Boolean);
+    
+    if (catsArray.length > 0) {
+      categoriesContainer.innerHTML = catsArray
+        .map(cat => `<div class="section-label" style="margin-bottom: 0;">${i18n.t(cat)}</div>`)
+        .join('');
+    } else {
+      categoriesContainer.innerHTML = `<div class="section-label" style="margin-bottom: 0;">Project</div>`;
+    }
+  }
   
-  setText("project-category", catsJoined || "Project");
   setText("project-subtitle", `${proj.year || ''} Case Study`.trim());
   
   // Update Background & Orb
