@@ -15,6 +15,7 @@ const SANITY_CONFIG = {
   apiVersion: "2024-03-31",
   // 🔐 ZERO-LEAK GUARANTEE: Never store tokens in this file.
   // Tokens are only read from window.SANITY_DEV_TOKEN (local-only) or Backend Proxy.
+  useCdn: false, // Force fresh data to reflect local changes immediately
   token: typeof window !== "undefined" ? (window.SANITY_DEV_TOKEN || null) : null
 };
 
@@ -45,8 +46,9 @@ async function sanityFetch(query) {
     }
   }
 
-  // 🚀 PATH C: Public CDN (No token - requires the dataset to be "Public" in Sanity settings)
-  const url = `https://${SANITY_CONFIG.projectId}.apicdn.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
+  // 🚀 PATH C: Public API/CDN (No token - requires the dataset to be "Public" in Sanity settings)
+  const host = SANITY_CONFIG.useCdn ? 'apicdn.sanity.io' : 'api.sanity.io';
+  const url = `https://${SANITY_CONFIG.projectId}.${host}/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
   const res = await fetch(url);
   if (!res.ok) {
      if (res.status === 401 || res.status === 404) {
