@@ -411,12 +411,16 @@ function renderProjects(projects) {
           <div class="project-info">
             <div class="project-meta">
               <div class="categories-wrap" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                ${(i18n.t(proj.category) || '').split(',').map(cat => `<span class="project-category tag">${cat.trim()}</span>`).join('')}
+                ${(() => {
+                  const rawCats = i18n.t(proj.category) || '';
+                  const catsArray = Array.isArray(rawCats) ? rawCats : rawCats.split(',').map(c => c.trim()).filter(Boolean);
+                  return catsArray.map(cat => `<span class="project-category tag">${cat}</span>`).join('');
+                })()}
               </div>
               <span class="project-year">${proj.year}</span>
             </div>
             <h3 class="project-title">${i18n.t(proj.title)}</h3>
-            <p class="project-desc">${i18n.t(proj.description)}</p>
+            <p class="project-desc">${i18n.t(proj.detailsSubtitle)}</p>
             <span class="project-link" aria-hidden="true" style="display: inline-flex; align-items: center; gap: 0.35rem;">
               View project
               <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -666,9 +670,13 @@ function renderProjectDetail(projects, id) {
   
   // Update Hero
   setText("project-title", i18n.t(proj.title));
-  const cats = (i18n.t(proj.category) || '').split(',').map(c => c.trim()).join(' • ');
-  setText("project-category", cats);
-  setText("project-subtitle", `${proj.year} Case Study`);
+  
+  // Handle Category Array or String
+  const rawCats = i18n.t(proj.category) || '';
+  const catsJoined = Array.isArray(rawCats) ? rawCats.join(' • ') : rawCats.split(',').map(c => c.trim()).join(' • ');
+  
+  setText("project-category", catsJoined || "Project");
+  setText("project-subtitle", `${proj.year || ''} Case Study`.trim());
   
   // Update Background & Orb
   const bg = document.getElementById("project-bg");
@@ -677,9 +685,22 @@ function renderProjectDetail(projects, id) {
   if (orb) orb.style.background = proj.accentColor;
   
   // Update Content
-  const desc = i18n.t(proj.description);
-  setHtml("project-challenge-headline", desc.split('.')[0] + ".");
-  setHtml("project-body", `<p class="about-body">${desc}</p>`);
+  const detailsTitle = i18n.t(proj.detailsTitle);
+  const detailsSubtitle = i18n.t(proj.detailsSubtitle);
+  const desc = i18n.t(proj.description) || "";
+
+  if (detailsTitle && detailsSubtitle) {
+    setHtml("project-challenge-headline", detailsTitle);
+    setHtml("project-body", `<p class="about-body">${detailsSubtitle}</p>`);
+  } else {
+    // Fallback: Smart split of the main description
+    const sentences = desc.split('.');
+    const firstSentence = sentences[0] ? sentences[0] + "." : "Project Details";
+    const remainingText = sentences.slice(1).join('.').trim();
+    
+    setHtml("project-challenge-headline", firstSentence);
+    setHtml("project-body", `<p class="about-body">${remainingText || desc}</p>`);
+  }
   
   // Handle Main Image (using coverImage field, fallback to first gallery item)
   const imageContainer = document.getElementById("project-main-image-container");
