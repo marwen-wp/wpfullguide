@@ -412,9 +412,9 @@ function renderProjects(projects) {
             <div class="project-meta">
               <div class="categories-wrap" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                 ${(() => {
-                  const rawCats = i18n.t(proj.category) || '';
+                  const rawCats = proj.category || '';
                   const catsArray = Array.isArray(rawCats) ? rawCats : rawCats.split(',').map(c => c.trim()).filter(Boolean);
-                  return catsArray.map(cat => `<span class="project-category tag">${cat}</span>`).join('');
+                  return catsArray.map(cat => `<span class="project-category tag">${i18n.t(cat)}</span>`).join('');
                 })()}
               </div>
               <span class="project-year">${proj.year}</span>
@@ -672,8 +672,10 @@ function renderProjectDetail(projects, id) {
   setText("project-title", i18n.t(proj.title));
   
   // Handle Category Array or String
-  const rawCats = i18n.t(proj.category) || '';
-  const catsJoined = Array.isArray(rawCats) ? rawCats.join(' • ') : rawCats.split(',').map(c => c.trim()).join(' • ');
+  const rawCats = proj.category || '';
+  const catsJoined = Array.isArray(rawCats) 
+    ? rawCats.map(c => i18n.t(c)).join(' • ') 
+    : (i18n.t(rawCats) || '').split(',').map(c => c.trim()).join(' • ');
   
   setText("project-category", catsJoined || "Project");
   setText("project-subtitle", `${proj.year || ''} Case Study`.trim());
