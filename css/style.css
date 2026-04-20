@@ -1331,8 +1331,8 @@ h6 {
 .project-visual-inner {
   position: absolute;
   inset: 0;
-  background: conic-gradient(from 180deg at 50% 50%, var(--bg, #0e0e10) 0deg, var(--accent, #9b8afb) 120deg, var(--bg, #0e0e10) 240deg);
-  opacity: 0.35;
+  background: var(--bg, #0e0e10);
+  opacity: 1;
   transition: opacity var(--t-base) var(--ease-out);
   display: flex;
   align-items: center;
@@ -1349,7 +1349,6 @@ h6 {
 
 .project-card:hover .project-visual-inner img {
   transform: scale(1.1);
-  opacity: 1 !important;
 }
 
 .project-card:hover .project-visual-inner {
@@ -1856,12 +1855,12 @@ img[loading="lazy"].loaded {
   aspect-ratio: 16/10;
   object-fit: cover;
   display: block;
-  opacity: 0.8;
-  transition: opacity var(--t-base) var(--ease-out);
+  opacity: 1;
+  transition: transform var(--t-base) var(--ease-out);
 }
 
 .gallery-item:hover img {
-  opacity: 1;
+  transform: scale(1.05);
 }
 
 /* Lightbox Overlay */

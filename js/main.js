@@ -405,7 +405,7 @@ function renderProjects(projects) {
         >
           <div class="project-visual" aria-hidden="true">
             <div class="project-visual-inner" style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              ${proj.coverImageUrl ? `<img src="${proj.coverImageUrl}" alt="${i18n.t(proj.title)}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.4s ease;">` : ''}
+              ${proj.coverImageUrl ? `<img src="${proj.coverImageUrl}" alt="${i18n.t(proj.title)}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">` : ''}
             </div>
           </div>
           <div class="project-info">
