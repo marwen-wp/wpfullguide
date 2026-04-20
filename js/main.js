@@ -325,6 +325,12 @@ function renderAbout(about) {
   if (about.headline) setHtml("about-headline", i18n.t(about.headline).replace(/\n/g, "<br>"));
   setText("about-body", i18n.t(about.body) || "");
 
+  // Update Profile Image
+  const img = document.querySelector(".about-profile img");
+  if (img && about.imageUrl) {
+    img.src = about.imageUrl;
+  }
+
   const statsEl = document.getElementById("about-stats");
   if (statsEl && about.stats) {
     statsEl.innerHTML = about.stats
