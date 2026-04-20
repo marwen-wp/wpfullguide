@@ -686,8 +686,10 @@ function renderProjectDetail(projects, id) {
     }
   }
   
-  const companyPart = proj.company ? ` at ${proj.company}` : '';
-  setText("project-subtitle", `${proj.year || ''} Case Study${companyPart}`.trim());
+  const companyPart = proj.company 
+    ? ` at <span style="color: var(--accent, var(--color-accent)); font-weight: 500;">${proj.company}</span>` 
+    : '';
+  setHtml("project-subtitle", `${proj.year || ''} Case Study${companyPart}`.trim());
   
   // Update Background & Orb
   const bg = document.getElementById("project-bg");
