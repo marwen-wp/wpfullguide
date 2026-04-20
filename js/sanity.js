@@ -100,7 +100,7 @@ async function fetchAllData() {
     "projects": {
       "config": *[_type == "projects" && _id == "projects-${lang}"][0]{ label, headline, cta },
       "items": *[_type == "project" && language == "${lang}"] | order(year desc){
-        "id": slug.current, isFeatured, title, category, year, detailsTitle, detailsSubtitle, accentColor, bgColor, liveUrl, 
+        "id": slug.current, isFeatured, title, category, year, company, detailsTitle, detailsSubtitle, accentColor, bgColor, liveUrl, 
         "coverImageUrl": coverImage.asset->url, "gallery": gallery[]{ "url": asset->url }
       }
     },
