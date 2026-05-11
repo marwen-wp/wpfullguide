@@ -275,19 +275,15 @@ function renderTestimonials(testimonials) {
           <p class="testimonial-quote">${i18n.t(item.quote)}</p>
           <div class="testimonial-author">
             <div class="testimonial-name">${item.author}</div>
-            <div class="testimonial-role">${i18n.t(item.role)}${item.company ? ` at <span class="testimonial-company">${item.company}</span>` : ''}</div>
+            <div class="testimonial-role">
+              ${i18n.t(item.role)}${item.company ? ` at ${item.company}` : ''}
+            </div>
           </div>
         </div>`
       )
       .join("");
-    // Only double for marquee if we have multiple items
-    if (testimonials.items.length > 1) {
-      container.innerHTML = cardsHtml + cardsHtml;
-      container.style.justifyContent = "flex-start";
-    } else {
-      container.innerHTML = cardsHtml;
-      container.style.justifyContent = "center";
-    }
+    // Double for marquee loop only if more than 1 item exists
+    container.innerHTML = testimonials.items.length > 1 ? cardsHtml + cardsHtml : cardsHtml;
   }
 }
 
@@ -347,6 +343,23 @@ function renderAbout(about) {
         </div>`
       )
       .join("");
+  }
+
+  // Render Trust Badges
+  const trustEl = document.getElementById("about-trust");
+  if (trustEl) {
+    const badges = [
+      { label: "Verified on Upwork", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>` },
+      { label: "100% Job Success", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>` },
+      { label: "Top Rated", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>` }
+    ];
+
+    trustEl.innerHTML = badges.map(b => `
+      <div class="trust-item">
+        <div class="trust-icon">${b.icon}</div>
+        <span>${b.label}</span>
+      </div>
+    `).join("");
   }
 }
 
