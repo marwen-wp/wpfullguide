@@ -86,29 +86,29 @@
   /* Identical Dark Design */
   --color-bg: #09090a;
   --color-bg-rgb: 9, 9, 10;
-  --color-bg-2: #0e0e10;
-  --color-bg-3: #121215;
-  --color-surface: rgba(22, 22, 25, 0.7);
-  --color-surface-2: rgba(30, 30, 34, 0.8);
-  --color-border: rgba(255, 255, 255, 0.05);
-  --color-border-2: rgba(255, 255, 255, 0.09);
+  --color-bg-2: #111114; /* Slightly more contrast for alternation */
+  --color-bg-3: #16161a;
+  --color-surface: rgba(30, 30, 35, 0.6);
+  --color-surface-2: rgba(40, 40, 45, 0.8);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-2: rgba(255, 255, 255, 0.12);
 
-  --color-text: #f4f4f7;
-  --color-text-2: #9494a5;
-  --color-text-3: #58576d;
+  --color-text: #fcfcfd;
+  --color-text-2: #a0a0b0;
+  --color-text-3: #68677a;
 
   --color-accent: #a8e86e;
   --color-accent-2: #bdf285;
   --color-accent-rgb: 168, 232, 110;
-  --color-accent-glow: rgba(168, 232, 110, 0.12);
+  --color-accent-glow: rgba(168, 232, 110, 0.1);
   --color-tag-text: var(--color-accent-2);
   --color-ghost-btn: var(--color-accent);
   --color-ghost-border: rgba(var(--color-accent-rgb), 0.3);
-  --color-menu-bg: rgba(10, 10, 11, 0.98);
+  --color-menu-bg: rgba(9, 9, 10, 0.98);
 
   --grad-dark: linear-gradient(180deg, rgba(9,9,10,0) 0%, rgba(9,9,10,1) 100%);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 40px rgba(var(--color-accent-rgb), 0.06);
+  --shadow-card: 0 15px 40px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 50px rgba(var(--color-accent-rgb), 0.05);
 }
 
 /* ═══════════════════════════════════════════════════════════════
