@@ -228,6 +228,11 @@ h6 {
 .section {
   padding-block: var(--space-2xl); /* Moderated for better vertical flow */
   position: relative;
+  background: var(--color-bg);
+}
+
+.section:nth-of-type(even) {
+  background: var(--color-bg-2);
 }
 
 .section-header {
