@@ -275,14 +275,19 @@ function renderTestimonials(testimonials) {
           <p class="testimonial-quote">${i18n.t(item.quote)}</p>
           <div class="testimonial-author">
             <div class="testimonial-name">${item.author}</div>
-            <div class="testimonial-role">${i18n.t(item.role)}</div>
-            ${item.company ? `<div class="testimonial-company">${item.company}</div>` : ''}
+            <div class="testimonial-role">${i18n.t(item.role)}${item.company ? ` at <span class="testimonial-company">${item.company}</span>` : ''}</div>
           </div>
         </div>`
       )
       .join("");
-    // Double for marquee
-    container.innerHTML = cardsHtml + cardsHtml;
+    // Only double for marquee if we have multiple items
+    if (testimonials.items.length > 1) {
+      container.innerHTML = cardsHtml + cardsHtml;
+      container.style.justifyContent = "flex-start";
+    } else {
+      container.innerHTML = cardsHtml;
+      container.style.justifyContent = "center";
+    }
   }
 }
 

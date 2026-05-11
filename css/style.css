@@ -1182,6 +1182,62 @@ h6 {
   object-fit: cover;
 }
 
+.about-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.about-badges-label {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-3);
+  margin-bottom: -0.25rem;
+}
+
+.about-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.about-badge-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.about-badge-icon.hexagon {
+  border: none;
+  background: var(--color-accent);
+  color: #0c1a06; /* Dark color for contrast on green */
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  width: 30px;
+  height: 30px;
+}
+
+.about-badge-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
 .about-content-column {
   max-width: 600px;
 }
@@ -1750,12 +1806,12 @@ img[loading="lazy"].loaded {
 }
 
 .testimonial-role {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--color-text-3);
 }
 
 .testimonial-company {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--color-accent);
   font-weight: 500;
 }
